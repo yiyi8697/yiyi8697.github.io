@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>瓦姑村 · 云端秘境｜怒江傈僳</title>
-  <!-- 字体与图标 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- GSAP 高级动画 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
@@ -25,11 +23,10 @@
       --surface-light: #212623;
       --text: #f0efe7;
       --text-muted: #9a9d99;
-      --accent: #c9a24e; /* 香槟金 */
-      --accent2: #3c6e47; /* 深绿 */
-      --accent3: #b45f3a; /* 陶土 */
+      --accent: #c9a24e;
+      --accent2: #3c6e47;
+      --accent3: #b45f3a;
       --gradient-gold: linear-gradient(135deg, #dbb45c, #a67c2e);
-      --gradient-dark: linear-gradient(180deg, rgba(13,15,14,0) 0%, rgba(13,15,14,1) 100%);
       --font-display: 'Playfair Display', serif;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --radius: 24px;
@@ -54,54 +51,70 @@
     .container {
       max-width: 1320px;
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 0 24px;
     }
 
-    /* 导航 */
+    /* ---------- 导航 ---------- */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      padding: 24px 0;
-      transition: all 0.5s ease;
-      mix-blend-mode: difference;
+      padding: 20px 0;
+      transition: all 0.4s ease;
+      background: transparent;
       color: white;
     }
     .navbar.scrolled {
-      background: rgba(13,15,14,0.85);
+      background: rgba(13,15,14,0.9);
       backdrop-filter: blur(20px);
-      padding: 16px 0;
-      mix-blend-mode: normal;
+      padding: 12px 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .navbar .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
     .logo {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 700;
       color: inherit;
       text-decoration: none;
       letter-spacing: 1px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      z-index: 1001;
     }
     .logo i {
-      font-size: 2.2rem;
+      font-size: 2rem;
       background: var(--gradient-gold);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 8px;
+    }
+    .navbar.scrolled .menu-toggle {
+      color: var(--text);
+    }
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 40px;
+      gap: 32px;
+      align-items: center;
+      transition: 0.3s;
     }
     .nav-links a {
       text-decoration: none;
@@ -109,33 +122,31 @@
       font-weight: 400;
       font-size: 0.95rem;
       letter-spacing: 0.8px;
-      transition: 0.3s;
       position: relative;
+      padding: 6px 0;
     }
-    .nav-links a::before {
+    .nav-links a::after {
       content: '';
       position: absolute;
-      bottom: -6px;
+      bottom: -4px;
       left: 0;
       width: 0;
       height: 1px;
       background: var(--accent);
       transition: 0.3s;
     }
-    .nav-links a:hover::before {
+    .nav-links a:hover::after {
       width: 100%;
     }
-    .menu-toggle {
-      display: none;
-    }
 
-    /* 英雄区 */
+    /* ---------- 英雄区 ---------- */
     .hero {
       height: 100vh;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
+      min-height: 600px;
     }
     .hero-bg {
       position: absolute;
@@ -146,17 +157,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.65);
-      transform: scale(1.05);
+      filter: brightness(0.55);
       transition: transform 6s ease;
-    }
-    .hero:hover .hero-bg img {
-      transform: scale(1.02);
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(13,15,14,0.2) 0%, rgba(13,15,14,0.7) 100%);
+      background: radial-gradient(circle at 50% 50%, rgba(13,15,14,0.1) 0%, rgba(13,15,14,0.7) 100%);
       z-index: 1;
     }
     .hero-content {
@@ -165,26 +172,26 @@
       max-width: 800px;
     }
     .hero-content h1 {
-      font-size: clamp(3.5rem, 9vw, 6.5rem);
+      font-size: clamp(2.5rem, 8vw, 6rem);
       line-height: 1.1;
       margin-bottom: 24px;
       color: white;
-      text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.4);
     }
     .hero-content .subtitle {
-      font-size: 1.25rem;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
       font-weight: 300;
-      margin-bottom: 48px;
-      color: rgba(255,255,255,0.85);
+      margin-bottom: 40px;
+      color: rgba(255,255,255,0.9);
       letter-spacing: 2px;
     }
     .btn-group {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
     }
     .btn {
-      padding: 16px 38px;
+      padding: 14px 32px;
       border-radius: 50px;
       font-weight: 500;
       text-decoration: none;
@@ -208,7 +215,7 @@
       box-shadow: 0 20px 40px rgba(201,162,78,0.45);
     }
     .btn-outline {
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.5);
       color: white;
       backdrop-filter: blur(10px);
     }
@@ -218,43 +225,43 @@
       border-color: white;
     }
 
-    /* 板块通用 */
+    /* ---------- 通用板块 ---------- */
     section {
-      padding: 120px 0;
+      padding: 80px 0;
       position: relative;
     }
     .section-header {
-      margin-bottom: 80px;
+      margin-bottom: 60px;
     }
     .section-tag {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       letter-spacing: 3px;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .section-header h2 {
-      font-size: 3rem;
+      font-size: clamp(2rem, 5vw, 2.8rem);
       line-height: 1.2;
       color: var(--text);
+      margin-bottom: 10px;
     }
     .section-header p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-muted);
       max-width: 600px;
-      margin-top: 16px;
     }
 
-    /* 数字村情 */
+    /* ---------- 数字档案卡片 ---------- */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      margin-top: 60px;
+      gap: 24px;
+      margin-top: 40px;
     }
     .stat-item {
       text-align: center;
-      padding: 30px;
+      padding: 24px 16px;
       background: var(--surface);
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.05);
@@ -264,18 +271,19 @@
       background: var(--surface-light);
     }
     .stat-number {
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
       font-weight: 700;
       color: var(--accent);
       font-family: var(--font-display);
+      line-height: 1.2;
     }
     .stat-label {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
-    /* 景点卡片 现代版 */
+    /* ---------- 景点卡片 ---------- */
     .spotlight-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -285,23 +293,23 @@
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
-      height: 420px;
+      height: 380px;
       background: var(--surface);
       cursor: pointer;
-      transition: 0.5s;
+      transition: 0.4s;
     }
     .spotlight-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
     .spotlight-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.8);
+      filter: brightness(0.75);
       transition: 0.6s;
     }
     .spotlight-card:hover img {
-      transform: scale(1.05);
+      transform: scale(1.04);
       filter: brightness(0.9);
     }
     .spotlight-card .card-info {
@@ -309,29 +317,29 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 30px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 28px 24px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
       color: white;
     }
     .card-info h4 {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
     }
     .card-info p {
       font-size: 0.9rem;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
-    /* 产品展示 - 3D 悬停 */
+    /* ---------- 产品展示 ---------- */
     .product-showcase {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
     }
     .product-item {
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 36px 28px;
+      padding: 32px 20px;
       text-align: center;
       transition: all 0.4s;
       border: 1px solid rgba(255,255,255,0.05);
@@ -345,7 +353,7 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(201,162,78,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(201,162,78,0.08) 0%, transparent 70%);
       opacity: 0;
       transition: 0.5s;
     }
@@ -354,54 +362,58 @@
       transform: translate(-25%, -25%);
     }
     .product-item:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
     .product-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
+      font-size: 2.6rem;
+      margin-bottom: 16px;
       display: inline-block;
       background: var(--surface-light);
-      width: 80px;
-      height: 80px;
-      line-height: 80px;
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
       border-radius: 50%;
     }
     .product-item h4 {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
     }
     .product-item p {
       color: var(--text-muted);
-      margin-bottom: 16px;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
     }
     .product-price {
       font-weight: 600;
       color: var(--accent);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
-    /* 预约 */
+    /* ---------- 预约区 ---------- */
     .booking-section {
       background: var(--surface);
       border-radius: var(--radius);
-      padding: 80px;
+      padding: 60px 48px;
       display: flex;
-      gap: 60px;
+      gap: 48px;
       align-items: center;
+      flex-wrap: wrap;
     }
     .booking-form {
-      flex: 1;
+      flex: 1 1 300px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
+    }
+    .booking-form h2 {
+      font-size: 2rem;
     }
     .booking-form input,
-    .booking-form select,
-    .booking-form textarea {
+    .booking-form select {
       background: var(--bg);
       border: 1px solid rgba(255,255,255,0.1);
-      padding: 16px 20px;
+      padding: 14px 20px;
       border-radius: 50px;
       color: white;
       font-family: inherit;
@@ -409,41 +421,125 @@
       outline: none;
       transition: 0.3s;
     }
-    .booking-form input:focus {
+    .booking-form input:focus,
+    .booking-form select:focus {
       border-color: var(--accent);
     }
     .booking-visual {
-      flex: 1;
+      flex: 1 1 300px;
       text-align: center;
     }
     .booking-visual img {
       max-width: 100%;
       border-radius: var(--radius);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     }
 
     footer {
       background: #0a0c0b;
-      padding: 60px 0;
+      padding: 48px 0;
       text-align: center;
       border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    @media (max-width: 992px) {
+    /* ---------- 移动端适配 ---------- */
+    @media (max-width: 1024px) {
       .spotlight-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .booking-section {
-        flex-direction: column;
-        padding: 40px;
-      }
-      .nav-links {
-        display: none;
+    }
+
+    @media (max-width: 768px) {
+      .navbar .container {
+        align-items: center;
       }
       .menu-toggle {
         display: block;
+      }
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 320px;
+        height: 100vh;
+        background: rgba(10, 12, 11, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+        padding: 32px;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+        z-index: 999;
+        list-style: none;
+      }
+      .nav-links.active {
+        right: 0;
+      }
+      .nav-links a {
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+      .hero {
+        min-height: 500px;
+        height: auto;
+        padding: 120px 0 80px;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+      }
+
+      .spotlight-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .spotlight-card {
+        height: 280px;
+      }
+
+      .product-showcase {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .booking-section {
+        padding: 32px 24px;
+        flex-direction: column;
+        gap: 32px;
+      }
+      .booking-form h2 {
+        font-size: 1.6rem;
+      }
+
+      .stats-grid {
+        gap: 12px;
+      }
+      .stat-item {
+        padding: 16px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-showcase {
+        grid-template-columns: 1fr;
+      }
+      .btn-group {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -452,9 +548,9 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="logo"><i class="fas fa-mountain"></i> 瓦姑</a>
-      <div class="menu-toggle" id="menuToggle">
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
         <i class="fas fa-bars"></i>
-      </div>
+      </button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">秘境</a></li>
         <li><a href="#attractions">地标</a></li>
@@ -467,11 +563,11 @@
   <!-- 英雄区 -->
   <section class="hero" id="home">
     <div class="hero-bg">
-      <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2071&auto=format&fit=crop" alt="怒江大峡谷">
+      <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=2071&auto=format&fit=crop" alt="怒江大峡谷" crossorigin="anonymous">
     </div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
-      <h1 data-animate="fadeUp">云端之上<br>瓦姑秘境</h1>
+      <h1 data-animate="fadeUp">秘境怒江<br>瓦姑村</h1>
       <p class="subtitle" data-animate="fadeUp" data-delay="200">驼峰航线 · 傈僳古村 · 海拔1800米的山珍宝藏</p>
       <div class="btn-group" data-animate="fadeUp" data-delay="400">
         <a href="#products" class="btn btn-primary">🔍 探索山珍</a>
@@ -486,7 +582,7 @@
       <div class="section-header" data-animate="fadeUp">
         <div class="section-tag">/// VILLAGE STORY</div>
         <h2>瓦姑村 · 数字档案</h2>
-        <p>泸水市六库镇傈僳族聚居地，怒江生物多样性核心区。</p>
+        <p>泸水市六库街道傈僳族聚居地，怒江生物多样性核心区。</p>
       </div>
       <div class="stats-grid">
         <div class="stat-item" data-animate="scaleIn"><div class="stat-number">1800</div><div class="stat-label">平均海拔 (米)</div></div>
@@ -507,15 +603,15 @@
       </div>
       <div class="spotlight-grid">
         <div class="spotlight-card" data-animate="fadeUp">
-          <img src="https://images.unsplash.com/photo-1504851149312-7ad075b2f5c5?q=80&w=2070&auto=format&fit=crop" alt="亚本兹">
+          <img src="https://photo.tuchong.com/3112466/f/887882297.jpg" alt="亚本兹高山草甸" crossorigin="anonymous">
           <div class="card-info"><h4>秘境亚本兹</h4><p>高山草甸与杜鹃花海，傈僳圣山。</p></div>
         </div>
         <div class="spotlight-card" data-animate="fadeUp" data-delay="100">
-          <img src="https://images.unsplash.com/photo-1533630757306-c2c0d74f42c9?q=80&w=2070&auto=format&fit=crop" alt="驼峰航线">
+          <img src="https://ts1.tc.mm.bing.net/th/id/R-C.79d1f313f1d2b51fb0f601ddaadaaf20?rik=ASyG5j9i8vUMrQ&riu=http%3a%2f%2fimg.kongzhong.com%2fwowpnew%2fnews%2f2014%2f07%2f25%2f00ec155a111406260262.jpg&ehk=yJZMpG2MxexjOW7aM5T%2bplqxPrD%2bQpYqHeX3vIOUByg%3d&risl=&pid=ImgRaw&r=0" alt="驼峰航线旧址" crossorigin="anonymous">
           <div class="card-info"><h4>驼峰航线标杆旧址</h4><p>二战航空导航石基，省级文保。</p></div>
         </div>
         <div class="spotlight-card" data-animate="fadeUp" data-delay="200">
-          <img src="https://images.unsplash.com/photo-1566583249722-df2b55f7a40e?q=80&w=2070&auto=format&fit=crop" alt="电视塔">
+          <img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.2ngCopNaXFWALgzztE83LQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="电视转播塔" crossorigin="anonymous">
           <div class="card-info"><h4>电视转播台旧址</h4><p>1978年高山铁塔，360°云海观景台。</p></div>
         </div>
       </div>
@@ -531,11 +627,11 @@
         <p>瓦姑核桃、花椒、酸木瓜、老窝火腿、傈僳腊肉、古树瓦姑茶。</p>
       </div>
       <div class="product-showcase">
-        <div class="product-item" data-animate="fadeUp"><div class="product-icon">🌰</div><h4>瓦姑核桃</h4><p>百年老树薄壳香</p><div class="product-price">¥38/斤</div></div>
-        <div class="product-item" data-animate="fadeUp" data-delay="50"><div class="product-icon">🌶️</div><h4>高山花椒</h4><p>大红袍麻香浓郁</p><div class="product-price">¥68/斤</div></div>
-        <div class="product-item" data-animate="fadeUp" data-delay="100"><div class="product-icon">🍋</div><h4>酸木瓜</h4><p>天然酸香入菜泡酒</p><div class="product-price">¥15/斤</div></div>
-        <div class="product-item" data-animate="fadeUp" data-delay="150"><div class="product-icon">🍖</div><h4>老窝火腿</h4><p>怒江黑猪三年酵香</p><div class="product-price">¥128/斤</div></div>
-        <div class="product-item" data-animate="fadeUp" data-delay="200"><div class="product-icon">🥓</div><h4>傈僳腊肉</h4><p>松枝冷熏晶莹剔透</p><div class="product-price">¥58/斤</div></div>
+        <div class="product-item" data-animate="fadeUp"><div class="product-icon">🌰</div><h4>瓦姑核桃</h4><p>百年老树薄壳香</p><div class="product-price">¥8/斤</div></div>
+        <div class="product-item" data-animate="fadeUp" data-delay="50"><div class="product-icon">🌶️</div><h4>高山花椒</h4><p>大红袍麻香浓郁</p><div class="product-price">¥6/斤</div></div>
+        <div class="product-item" data-animate="fadeUp" data-delay="100"><div class="product-icon">🍋</div><h4>酸木瓜</h4><p>天然酸香入菜泡酒</p><div class="product-price">¥5/斤</div></div>
+        <div class="product-item" data-animate="fadeUp" data-delay="150"><div class="product-icon">🍖</div><h4>高山火腿</h4><p>怒江黑猪三年酵香</p><div class="product-price">¥68/斤</div></div>
+        <div class="product-item" data-animate="fadeUp" data-delay="200"><div class="product-icon">🥓</div><h4>傈僳腊肉</h4><p>松枝冷熏晶莹剔透</p><div class="product-price">¥48/斤</div></div>
         <div class="product-item" data-animate="fadeUp" data-delay="250"><div class="product-icon">🍵</div><h4>瓦姑茶</h4><p>百年古树栗香回甘</p><div class="product-price">¥280/饼</div></div>
       </div>
     </div>
@@ -546,20 +642,23 @@
     <div class="container">
       <div class="booking-section" data-animate="fadeUp">
         <div class="booking-form">
-          <h2 style="font-size:2rem;">预约探访 · 阿克几</h2>
-          <input type="text" placeholder="姓名">
-          <input type="tel" placeholder="手机号码">
-          <input type="date">
-          <select>
+          <h2 style="font-size:2rem; margin-bottom:8px;">预约探访 · 阿克几</h2>
+          <p style="color:var(--text-muted); margin-bottom:8px;">傈僳语“谢谢”，我们云端见。</p>
+          <input type="text" placeholder="姓名" required>
+          <input type="tel" placeholder="手机号码" required>
+          <input type="date" required>
+          <select required>
+            <option value="">选择体验项目</option>
             <option>茶山采茶体验</option>
             <option>傈僳家访手抓饭</option>
             <option>驼峰航线徒步</option>
             <option>亚本兹秘境露营</option>
+            <option>山货采购专线</option>
           </select>
-          <button class="btn btn-primary" style="justify-content:center;">提交预约</button>
+          <button class="btn btn-primary" style="justify-content:center; width:100%;">提交预约</button>
         </div>
         <div class="booking-visual">
-          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2070&auto=format&fit=crop" alt="傈僳风情">
+          <img src="https://ts1.tc.mm.bing.net/th/id/R-C.a8770baf443ed3b34f27046add4c70c1?rik=tTiXPMAqq3DPQQ&riu=http%3a%2f%2fmdodm.net%2fUploadFile%2feditorfile%2fimage%2f20160111%2f14524947183962156.jpg&ehk=DiVpe8BD8Z%2bpRInLzdQrh9opCx4gkReIm%2f1JPuOdMzU%3d&risl=&pid=ImgRaw&r=0" alt="傈僳风情" crossorigin="anonymous">
         </div>
       </div>
     </div>
@@ -567,8 +666,8 @@
 
   <footer>
     <div class="container">
-      <p>📍 云南省怒江州泸水市六库镇瓦姑村 · 合作社电话 0886-3620xxx</p>
-      <p style="color:var(--text-muted);">© 2025 瓦姑云端合作社</p>
+      <p>📍 云南省怒江州泸水市六库街道瓦姑村 · 村委会电话 （0886）-303-6125</p>
+      <p style="margin-top:8px;">© 2025 瓦姑云端合作社</p>
     </div>
   </footer>
 
@@ -578,6 +677,19 @@
     // 导航滚动效果
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    // 点击菜单项关闭
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
     });
 
     // 通用进场动画
@@ -599,7 +711,7 @@
       );
     });
 
-    // 产品卡片悬浮3D效果
+    // 产品卡片悬浮微交互
     document.querySelectorAll('.product-item').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
@@ -607,8 +719,8 @@
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
+        const rotateX = (y - centerY) / 12;
+        const rotateY = (centerX - x) / 12;
         gsap.to(card, { rotateX: rotateX, rotateY: rotateY, duration: 0.4, ease: 'power2.out' });
       });
       card.addEventListener('mouseleave', () => {
@@ -616,10 +728,15 @@
       });
     });
 
-    // 表单提交
+    // 表单提交提示
     document.querySelector('.booking-form button').addEventListener('click', (e) => {
       e.preventDefault();
-      alert('感谢预约！瓦姑村欢迎您。');
+      const name = document.querySelector('.booking-form input[type="text"]').value.trim();
+      if (!name) {
+        alert('请填写您的姓名');
+        return;
+      }
+      alert(`感谢 ${name} 的预约！瓦姑村欢迎您。`);
     });
   </script>
 </body>
